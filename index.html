@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sistema de Bingo</title>
+  
+  <link rel="icon" type="image/png" href="img/icone.png" />
+  <link rel="shortcut icon" type="image/png" href="img/icone.png" />
+  <link rel="apple-touch-icon" href="img/icone.png" />
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  
+  <div class="main-number-top" id="mainNumberTop" aria-live="polite">
+    <div class="bingo-letter" id="bingoLetter">--</div>
+    <div class="bingo-number" id="bingoNumber">--</div>
+  </div>
+  
+  <div class="number-roulette" id="numberRoulette" style="display: none;">
+    <div class="roulette-container" id="rouletteContainer"></div>
+  </div>
+  
+  <div class="left-controls">
+    <button id="themeButton" class="control-btn" aria-label="Alternar tema">🌓 Tema</button>
+  </div>
+  
+  <div class="controls">
+    <button id="createCardsButton" class="control-btn" aria-label="Criar cartelas">📄 Cartelas</button>
+    <button id="resetButton" class="control-btn" aria-label="Resetar jogo">🔄 Resetar</button>
+    <button id="fullscreenButton" class="control-btn" aria-label="Alternar tela cheia">⛶ Tela Cheia</button>
+  </div>
+  
+  <div class="stats">
+    <div id="sorteadosLine">Sorteados: 0/75</div>
+    <div id="restantesLine">Restantes: 0</div>
+    <div id="saveStatus">Salvo</div>
+  </div>
+  
+  <div class="center-image">
+    <img 
+      src="img/bingo.png" 
+      alt="Bingo" 
+      onerror="this.src='data:image/svg+xml;charset=utf-8,%3Csvg xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width%3D%22300%22 height%3D%22200%22 viewBox%3D%220 0 300 200%22%3E%3Crect width%3D%22300%22 height%3D%22200%22 fill%3D%22%230b66ff%22%2F%3E%3Ctext x%3D%22150%22 y%3D%22110%22 font-family%3D%22Arial%22 font-size%3D%2240%22 text-anchor%3D%22middle%22 fill%3D%22white%22%3EBINGO%3C%2Ftext%3E%3C%2Fsvg%3E'"
+    />
+  </div>
+  
+  <div class="container">
+    <div class="side-panel left">
+      <div class="card">
+        <div class="card-header">Números Sorteados</div>
+        <div class="numbers-container" id="leftNumbers"></div>
+      </div>
+    </div>
+    
+    <div class="center">
+      <button id="drawButton">Sortear</button>
+      <div class="sr-only" id="announcement" aria-live="assertive"></div>
+    </div>
+    
+    <div class="side-panel right">
+      <div class="card">
+        <div class="card-header">Números Sorteados</div>
+        <div class="numbers-container right-numbers" id="rightNumbers"></div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal-overlay" id="confirmModal">
+    <div class="modal">
+      <h3>Confirmar Reset</h3>
+      <p>Tem certeza que deseja resetar o jogo? Todos os números sorteados serão perdidos.</p>
+      <div class="modal-buttons">
+        <button id="confirmReset" class="modal-btn modal-confirm">Sim, Resetar</button>
+        <button id="cancelReset" class="modal-btn modal-cancel">Cancelar</button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal-overlay" id="cardsModal">
+    <div class="modal cards-modal">
+      <h3>Criar Cartelas de Bingo</h3>
+      <div class="cards-options">
+        <div class="cards-input-group">
+          <label for="cardsQuantity">Quantidade de Cartelas:</label>
+          <input type="number" id="cardsQuantity" min="1" max="100" value="4">
+        </div>
+        <div class="cards-preview">
+          <strong>Preview:</strong><br>
+          • 4 cartelas por folha A4<br>
+          • Cartelas únicas e aleatórias<br>
+        </div>
+      </div>
+      <div class="modal-buttons">
+        <button id="generateCards" class="modal-btn modal-confirm">Gerar PDF</button>
+        <button id="cancelCards" class="modal-btn modal-cancel">Cancelar</button>
+      </div>
+    </div>
+  </div>
+  
+  <footer role="contentinfo" aria-label="Rodapé do sistema">
+    <div class="footer-content">
+      <div class="footer-left">
+        <div class="footer-icon">
+          <img src="img/icone.png" alt="Ícone Bingo" />
+        </div>
+        <div class="footer-text">
+          <p>&copy; 2025 Edivaldo Chaves</p>
+          <p class="footer-sub">Sistema de Bingo - Todos os direitos reservados</p>
+        </div>
+      </div>
+      <div class="footer-version">
+        <span>v2.0</span>
+        <span>|</span>
+        <span>E.C</span>
+      </div>
+    </div>
+  </footer>
+  
+  <script src="script.js"></script>
+</body>
+</html>
